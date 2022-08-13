@@ -1,0 +1,10 @@
+FROM python:3.10.6-slim
+
+RUN mkdir /app
+WORKDIR /app
+
+COPY requirements.txt /app/
+COPY . /app/
+RUN pip install --user -r requirements.txt
+
+CMD python manage.py runserver 0.0.0.0:8000

@@ -1,0 +1,12 @@
+FROM python:3.10.6-slim
+
+RUN mkdir /my_utils
+WORKDIR /my_utils
+
+COPY my_utils /my_utils/utils
+COPY source_data /my_utils/source_data
+
+RUN pip install requests
+RUN pip install minio
+
+CMD python utils/create_bucket_and_upload_data.py
