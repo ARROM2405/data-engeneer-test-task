@@ -5,11 +5,14 @@ services:
     image: bitnami/minio:latest
     hostname: minio
     restart: always
-    environment:
-      - MINIO_ROOT_USER=minioadmin
-      - MINIO_ROOT_PASSWORD=minioadmin
     volumes:
       - ./minio:/data
+      - ..env:/minio.env
+    env_file:
+      - .env
+    environment:
+      - MINIO_ROOT_USER=$MINIOLOG
+      - MINIO_ROOT_PASSWORD=$MINIOPASS
     ports:
       - "9000:9000"
       - "9001:9001"
@@ -35,3 +38,11 @@ services:
     depends_on:
       - minio
       - django_app
+
+
+#env_file:
+#      - .env
+#    environment:
+#      POSTGRES_USER: $POSTGRES_USER
+#      POSTGRES_PASSWORD: $POSTGRES_PASSWORD
+#      POSTGRES_DB: $POSTGRES_DB
